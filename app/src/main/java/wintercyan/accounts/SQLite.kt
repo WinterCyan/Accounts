@@ -24,26 +24,22 @@ class SQLite(context: Context, database: String, version: Int) : SQLiteOpenHelpe
         db!!.execSQL(DROP_ITEM)
     }
 
-    fun query(){
-        val db = writableDatabase
-        var cursor: Cursor? = null
-        try {
-            cursor = db.rawQuery("select * from item", null)
-        }catch (e: SQLiteException){
-            e.printStackTrace()
-        }
+    fun query(db: SQLiteDatabase): ArrayList<Account>{
+        var cursor = db.rawQuery("select * from item", null)
         var name: String
         var date: String
         var amount: Float
+        var list = ArrayList<Account>()
         if (cursor!!.moveToFirst()){
-            while (!cursor.isLast){
+            do {
                 name = cursor.getString(cursor.getColumnIndex("name"))
                 date = cursor.getString(cursor.getColumnIndex("date"))
                 amount = cursor.getFloat(cursor.getColumnIndex("amount"))
-                println("$name, $date, $amount")
-                println(cursor.columnNames)
-            }
+                list.add(Account(name, date, amount))
+            } while (cursor.moveToNext())
         }
+        cursor.close()
+        return list
     }
 }
 

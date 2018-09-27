@@ -10,10 +10,11 @@ class PageAdapter(fm: FragmentManager, private val context: Context): FragmentPa
         return 3
     }
 
-    override fun getItem(p0: Int): Fragment {
+    override fun getItem(p0: Int): Fragment? {
         when (p0) {
             0 -> return AddFragment.newInstance(context)
-            1 -> return ItemFragment()
+            1 -> return ItemFragment().newInstance(context)
+            3 -> return null
         }
         return AddFragment()
     }

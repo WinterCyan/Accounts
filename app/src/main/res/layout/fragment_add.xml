@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
@@ -8,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -27,8 +29,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:defaultFocusHighlightEnabled="false"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:focusedByDefault="false"
+                android:importantForAutofill="no"
+                android:inputType="text|textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -48,12 +53,13 @@
 
             <EditText
                 android:id="@+id/dateText"
-                android:clickable="false"
-                android:focusable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="false"
                 android:ems="10"
+                android:focusable="false"
+                android:focusedByDefault="false"
                 android:inputType="date" />
 
             <Button
@@ -86,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:focusedByDefault="false"
                 android:inputType="numberDecimal" />
         </LinearLayout>
 
@@ -96,5 +103,24 @@
             android:text="Add Account"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="10dp"
+                android:src="@mipmap/addicon3"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="normal"
+                app:maxImageSize="36dp" />
+        </LinearLayout>
+
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
