@@ -6,25 +6,17 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.provider.Telephony
-import android.renderscript.ScriptGroup
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
 import android.text.InputFilter
 import android.text.InputType
-import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_item.*
-import kotlinx.android.synthetic.main.second.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -72,10 +64,10 @@ class AddFragment: Fragment() {
         }
 
         addBtn!!.setOnClickListener {
-            val date = dateText!!.text.toString()
-            val name: String = nameText!!.text.toString()
-            val amount: Float = amountText!!.text.toString().toFloat()
-            if (!name.isEmpty()&&!date.isEmpty()&&amount!=null){
+            if (!nameText!!.text.isEmpty()&&!dateText!!.text.isEmpty()&&!amountText!!.text.isEmpty()){
+                val date = dateText!!.text.toString()
+                val name: String = nameText!!.text.toString()
+                val amount: Float = amountText!!.text.toString().toFloat()
                 dbHelper = SQLite(passedContext!!, "accounts.db", 2)
                 val db = dbHelper!!.writableDatabase
                 var values = ContentValues().apply {
@@ -126,23 +118,39 @@ class AddFragment: Fragment() {
 
         floatingBtn!!.setOnClickListener{
             val builder = AlertDialog.Builder(passedContext)
-            builder.setTitle("Add an account")
+            builder.setTitle("New meal account")
             val input = EditText(passedContext)
             input.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             input.filters = arrayOf(filter)
             builder.setView(input)
-            val listener = DialogInterface.OnClickListener{ dialog, which ->
-                when(which){
-                    DialogInterface.BUTTON_POSITIVE ->{
+            val listener = DialogInterface.OnClickListener { _, which ->
+                when (which) {
+                    DialogInterface.BUTTON_POSITIVE -> {
                         println("${input.text} added.")
-                    }
-                    DialogInterface.BUTTON_NEGATIVE -> {
-                        dialog.cancel()
+                        val mealAmount: Float
+                        if (!input.text.isEmpty()) {
+                            mealAmount = input.text.toString().toFloat()
+                            dbHelper = SQLite(passedContext!!, "accounts.db", 2)
+                            val db = dbHelper!!.writableDatabase
+                            var values = ContentValues().apply {
+                                put("name", "Meal Account")
+                                put("date", SimpleDateFormat("MM/dd/yyyy").format(Date()).toString())
+                                put("amount", mealAmount)
+                            }
+                            db.insert("item", null, values)
+                        } else{
+                            val builder = AlertDialog.Builder(passedContext)
+                            builder.setMessage("No amount.").setCancelable(false).setPositiveButton("OK") { dialog, _ ->
+                                dialog.cancel()
+                            }
+                            builder.create().show()
+                        }
                     }
                 }
             }
             builder.setPositiveButton("ADD", listener)
             builder.setNegativeButton("CANCEL", listener)
+            builder.setMessage("Input the amount of this meal: ")
             builder.create().show()
         }
 

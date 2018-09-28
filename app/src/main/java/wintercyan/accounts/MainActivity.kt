@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        pageAdapter = PageAdapter(supportFragmentManager, this)
+        pageAdapter = PageAdapter(supportFragmentManager, this, arrayListOf("NEW", "ACCOUNTS", "SUMMARY"))
         viewPager = findViewById(R.id.viewPager)
         viewPager!!.adapter = pageAdapter
 

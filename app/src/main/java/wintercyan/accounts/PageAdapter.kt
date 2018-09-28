@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 
-class PageAdapter(fm: FragmentManager, private val context: Context): FragmentPagerAdapter(fm) {
+class PageAdapter(fm: FragmentManager, private val context: Context, var tabs: ArrayList<String>): FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
         return 3
     }
@@ -14,9 +14,11 @@ class PageAdapter(fm: FragmentManager, private val context: Context): FragmentPa
         when (p0) {
             0 -> return AddFragment.newInstance(context)
             1 -> return ItemFragment().newInstance(context)
-            3 -> return null
+            3 -> return SummaryFragment()
         }
         return AddFragment()
     }
+
+    override fun getPageTitle(position: Int): CharSequence = tabs[position]
 
 }
