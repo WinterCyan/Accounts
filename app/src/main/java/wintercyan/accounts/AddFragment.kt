@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.Telephony
 import android.renderscript.ScriptGroup
 import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
@@ -21,6 +22,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_item.*
 import kotlinx.android.synthetic.main.second.*
 import java.text.SimpleDateFormat
@@ -32,7 +34,6 @@ class AddFragment: Fragment() {
     private var nameText: EditText? = null
     private var dateText: EditText? = null
     private var amountText: EditText? = null
-    private var dateBtn: Button? = null
     private var calendar = Calendar.getInstance()!!
     private var dbHelper: SQLite? = null
     private var floatingBtn: FloatingActionButton? = null
@@ -43,7 +44,6 @@ class AddFragment: Fragment() {
         dateText = rootView.findViewById(R.id.dateText)
         amountText = rootView.findViewById(R.id.amountText)
         addBtn = rootView.findViewById(R.id.addButton)
-        dateBtn = rootView.findViewById(R.id.dateBtn)
         floatingBtn = rootView.findViewById(R.id.floatingBtn)
 
         val filter = InputFilter { source, _, _, dest, _, _ ->
@@ -61,6 +61,16 @@ class AddFragment: Fragment() {
 
         amountText!!.filters = arrayOf(filter)
 
+        dateText!!.setOnClickListener {
+            DatePickerDialog(passedContext, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, month)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                val format = SimpleDateFormat("MM/dd/yyyy", Locale.CHINA)
+                dateText!!.setText(format.format(calendar.time))
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
         addBtn!!.setOnClickListener {
             val date = dateText!!.text.toString()
             val name: String = nameText!!.text.toString()
@@ -76,14 +86,26 @@ class AddFragment: Fragment() {
                 val dialogClickListener = DialogInterface.OnClickListener { _, which ->
                     when(which){
                         DialogInterface.BUTTON_POSITIVE -> {
-                            db.insert("item", null, values)
+                            var cancel = false
+                            Snackbar.make(view!!, "Account added.", Snackbar.LENGTH_SHORT).setAction("Undo") {
+                                //cancel the insert.
+                                cancel = true
+                                Toast.makeText(passedContext, "Canceled", Toast.LENGTH_SHORT).show()
+                            }.show()
+//                            val list = dbHelper!!.query(db)
+//                            for (account in list)
+//                                println("${account.name}, ${account.date}, ${account.amount}")
+                            Timer().schedule(object : TimerTask() {
+                                override fun run() {
+                                    if (!cancel) {
+                                        db.insert("item", null, values)
+                                    }
+                                }
+                            }, 2300)
+
                             dateText!!.setText("")
                             amountText!!.setText("")
                             nameText!!.setText("")
-
-                            val list = dbHelper!!.query(db)
-                            for (account in list)
-                                println("${account.name}, ${account.date}, ${account.amount}")
                         }
                     }
                 }
@@ -100,16 +122,6 @@ class AddFragment: Fragment() {
                 }
                 builder.create().show()
             }
-        }
-
-        dateBtn!!.setOnClickListener {
-            DatePickerDialog(passedContext, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH, month)
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val format = SimpleDateFormat("MM/dd/yyyy", Locale.CHINA)
-                dateText!!.setText(format.format(calendar.time))
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
 
         floatingBtn!!.setOnClickListener{

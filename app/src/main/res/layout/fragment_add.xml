@@ -56,18 +56,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:clickable="false"
                 android:ems="10"
                 android:focusable="false"
                 android:focusedByDefault="false"
                 android:inputType="date" />
-
-            <Button
-                android:id="@+id/dateBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Select Date" />
 
         </LinearLayout>
 
