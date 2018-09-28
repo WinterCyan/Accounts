@@ -118,7 +118,7 @@ class AddFragment: Fragment() {
 
         floatingBtn!!.setOnClickListener{
             val builder = AlertDialog.Builder(passedContext)
-            builder.setTitle("New meal account")
+            builder.setTitle("New food account")
             val input = EditText(passedContext)
             input.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             input.filters = arrayOf(filter)
@@ -133,7 +133,7 @@ class AddFragment: Fragment() {
                             dbHelper = SQLite(passedContext!!, "accounts.db", 2)
                             val db = dbHelper!!.writableDatabase
                             var values = ContentValues().apply {
-                                put("name", "Meal Account")
+                                put("name", "Food")
                                 put("date", SimpleDateFormat("MM/dd/yyyy").format(Date()).toString())
                                 put("amount", mealAmount)
                             }
@@ -150,7 +150,7 @@ class AddFragment: Fragment() {
             }
             builder.setPositiveButton("ADD", listener)
             builder.setNegativeButton("CANCEL", listener)
-            builder.setMessage("Input the amount of this meal: ")
+            builder.setMessage("Input the amount of this account: ")
             builder.create().show()
         }
 

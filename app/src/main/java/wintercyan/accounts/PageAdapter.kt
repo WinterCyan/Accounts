@@ -14,9 +14,9 @@ class PageAdapter(fm: FragmentManager, private val context: Context, var tabs: A
         when (p0) {
             0 -> return AddFragment.newInstance(context)
             1 -> return ItemFragment().newInstance(context)
-            3 -> return SummaryFragment()
+            3 -> return SummaryFragment().newInstance(context)
         }
-        return AddFragment()
+        return SummaryFragment().newInstance(context)
     }
 
     override fun getPageTitle(position: Int): CharSequence = tabs[position]

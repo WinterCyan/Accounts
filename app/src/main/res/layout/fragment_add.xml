@@ -122,7 +122,7 @@
                 android:layout_gravity="bottom|end"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
-                android:src="@mipmap/addicon3"
+                android:src="@mipmap/addicon"
                 app:backgroundTint="@color/colorSecondary"
                 app:fabSize="normal"
                 app:maxImageSize="30dp" />
