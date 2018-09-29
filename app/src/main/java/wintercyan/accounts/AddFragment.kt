@@ -8,6 +8,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
+import android.support.design.widget.TextInputEditText
 import android.support.v4.app.Fragment
 import android.text.InputFilter
 import android.text.InputType
@@ -23,9 +24,9 @@ import java.util.*
 class AddFragment: Fragment() {
     private var passedContext: Context? = null
     private var addBtn: Button? = null
-    private var nameText: EditText? = null
-    private var dateText: EditText? = null
-    private var amountText: EditText? = null
+    private var nameText: TextInputEditText? = null
+    private var dateText: TextInputEditText? = null
+    private var amountText: TextInputEditText? = null
     private var calendar = Calendar.getInstance()!!
     private var dbHelper: SQLite? = null
     private var floatingBtn: FloatingActionButton? = null
@@ -36,7 +37,7 @@ class AddFragment: Fragment() {
         dateText = rootView.findViewById(R.id.dateText)
         amountText = rootView.findViewById(R.id.amountText)
         addBtn = rootView.findViewById(R.id.addButton)
-        floatingBtn = rootView.findViewById(R.id.floatingBtn)
+        floatingBtn = rootView.findViewById(R.id.addFab)
 
         val filter = InputFilter { source, _, _, dest, _, _ ->
             if (dest!!.length === 0 && source!! == "." ) return@InputFilter "0."
@@ -64,7 +65,7 @@ class AddFragment: Fragment() {
         }
 
         addBtn!!.setOnClickListener {
-            if (!nameText!!.text.isEmpty()&&!dateText!!.text.isEmpty()&&!amountText!!.text.isEmpty()){
+            if (!nameText!!.text!!.isEmpty()&&!dateText!!.text!!.isEmpty()&&!amountText!!.text!!.isEmpty()){
                 val date = dateText!!.text.toString()
                 val name: String = nameText!!.text.toString()
                 val amount: Float = amountText!!.text.toString().toFloat()
