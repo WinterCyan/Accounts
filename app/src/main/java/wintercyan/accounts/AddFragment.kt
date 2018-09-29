@@ -92,6 +92,7 @@ class AddFragment: Fragment() {
                                 override fun run() {
                                     if (!cancel) {
                                         db.insert("item", null, values)
+                                        db.close()
                                     }
                                 }
                             }, 2300)
@@ -99,6 +100,9 @@ class AddFragment: Fragment() {
                             dateText!!.setText("")
                             amountText!!.setText("")
                             nameText!!.setText("")
+                            nameText!!.error = null
+                            dateText!!.error = null
+                            amountText!!.error = null
                         }
                     }
                 }
@@ -109,11 +113,14 @@ class AddFragment: Fragment() {
                 builder.setNegativeButton("CANCEL", dialogClickListener)
                 builder.create().show()
             }else{
-                val builder = AlertDialog.Builder(passedContext)
-                builder.setMessage("Fill all blanks").setCancelable(false).setPositiveButton("OK") { dialog, _ ->
-                    dialog.cancel()
-                }
-                builder.create().show()
+//                val builder = AlertDialog.Builder(passedContext)
+//                builder.setMessage("Fill all blanks").setCancelable(false).setPositiveButton("OK") { dialog, _ ->
+//                    dialog.cancel()
+//                }
+//                builder.create().show()
+                if (nameText!!.text!!.isEmpty()) nameText!!.error = "Item name is required!"
+                if (dateText!!.text!!.isEmpty()) dateText!!.error = "Date is required!"
+                if (amountText!!.text!!.isEmpty()) amountText!!.error = "Amount is required!"
             }
         }
 
@@ -139,6 +146,7 @@ class AddFragment: Fragment() {
                                 put("amount", mealAmount)
                             }
                             db.insert("item", null, values)
+                            db.close()
                         } else{
                             val builder = AlertDialog.Builder(passedContext)
                             builder.setMessage("No amount.").setCancelable(false).setPositiveButton("OK") { dialog, _ ->

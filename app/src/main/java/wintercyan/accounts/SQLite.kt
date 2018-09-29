@@ -26,16 +26,18 @@ class SQLite(context: Context, database: String, version: Int) : SQLiteOpenHelpe
 
     fun query(db: SQLiteDatabase): ArrayList<Account>{
         var cursor = db.rawQuery("select * from item", null)
+        var id: Int
         var name: String
         var date: String
         var amount: Float
         var list = ArrayList<Account>()
         if (cursor!!.moveToFirst()){
             do {
+                id = cursor.getInt(cursor.getColumnIndex("id"))
                 name = cursor.getString(cursor.getColumnIndex("name"))
                 date = cursor.getString(cursor.getColumnIndex("date"))
                 amount = cursor.getFloat(cursor.getColumnIndex("amount"))
-                list.add(Account(name, date, amount))
+                list.add(Account(id, name, date, amount))
             } while (cursor.moveToNext())
         }
         cursor.close()
