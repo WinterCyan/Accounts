@@ -59,7 +59,7 @@ class AddFragment: Fragment() {
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val format = SimpleDateFormat("MM/dd/yyyy", Locale.CHINA)
+                val format = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
                 dateText!!.setText(format.format(calendar.time))
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
@@ -142,7 +142,7 @@ class AddFragment: Fragment() {
                             val db = dbHelper!!.writableDatabase
                             var values = ContentValues().apply {
                                 put("name", "Food")
-                                put("date", SimpleDateFormat("MM/dd/yyyy").format(Date()).toString())
+                                put("date", SimpleDateFormat("yyyy-MM-dd").format(Date()).toString())
                                 put("amount", mealAmount)
                             }
                             db.insert("item", null, values)

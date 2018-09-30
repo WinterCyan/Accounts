@@ -15,6 +15,14 @@ class SummaryFragment: Fragment() {
         val dayCard = rootView.findViewById<CardView>(R.id.dayCard)
         val monthCard = rootView.findViewById<CardView>(R.id.monthCard)
 
+        monthCard.setOnClickListener {
+            val dbHelper = SQLite(passedContext!!, "accounts.db", 2)
+            val db = dbHelper.writableDatabase
+            var accounts = dbHelper.query(db, "one month")
+            db.close()
+
+            // refresh the summary view.
+        }
         return rootView
     }
 

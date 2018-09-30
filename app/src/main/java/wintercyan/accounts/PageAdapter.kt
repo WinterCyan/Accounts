@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 
-class PageAdapter(fm: FragmentManager, private val context: Context, var tabs: ArrayList<String>): FragmentPagerAdapter(fm) {
+class PageAdapter(fm: FragmentManager, private val context: Context, private var tabs: ArrayList<String>): FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
         return 3
     }

@@ -25,8 +25,7 @@ class ItemFragment: Fragment() {
         saveBtn!!.setOnClickListener{
             val dbHelper = SQLite(passedContext!!, "accounts.db", 2)
             val db = dbHelper!!.writableDatabase
-            val accounts = dbHelper.query(db)
-            println(accounts.size)
+            val accounts = dbHelper.query(db,"all")
             var writeContent: String
             passedContext!!.openFileOutput("accounts.txt", Context.MODE_PRIVATE).use {
                 for (account in accounts){
@@ -52,7 +51,7 @@ class ItemFragment: Fragment() {
     private fun updateItemFragment(view: RecyclerView){
         val dbHelper = SQLite(passedContext!!, "accounts.db", 2)
         val db = dbHelper!!.writableDatabase
-        accounts = dbHelper!!.query(db)
+        accounts = dbHelper!!.query(db, "all")
         db.close()
         accounts!!.reverse()
 
