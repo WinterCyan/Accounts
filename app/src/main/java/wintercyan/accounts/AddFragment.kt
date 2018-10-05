@@ -69,7 +69,7 @@ class AddFragment: Fragment() {
                 val date = dateText!!.text.toString()
                 val name: String = nameText!!.text.toString()
                 val amount: Float = amountText!!.text.toString().toFloat()
-                dbHelper = SQLite(passedContext!!, "accounts.db", 2)
+                dbHelper = SQLite(passedContext!!, dbName, 2)
                 val db = dbHelper!!.writableDatabase
                 var values = ContentValues().apply {
                     put("name", name)
@@ -138,7 +138,7 @@ class AddFragment: Fragment() {
                         val mealAmount: Float
                         if (!input.text.isEmpty()) {
                             mealAmount = input.text.toString().toFloat()
-                            dbHelper = SQLite(passedContext!!, "accounts.db", 2)
+                            dbHelper = SQLite(passedContext!!, dbName, 2)
                             val db = dbHelper!!.writableDatabase
                             var values = ContentValues().apply {
                                 put("name", "Food")

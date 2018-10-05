@@ -5,53 +5,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="top|center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/dayCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         app:cardBackgroundColor="@color/colorFontLight"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:text="DAY"
+            android:text="All Days"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@color/colorSecondary"
-            android:textSize="44sp"
+            android:textSize="36sp"
             android:textStyle="bold"
-            tools:text="DAY" />
+            tools:text="All Days" />
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/monthCard"
+        android:id="@+id/lastMonthCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/colorFontLight"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="Last Month"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="@color/colorSecondary"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            tools:text="Last Month" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/thisMonthCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:clickable="true"
         app:cardBackgroundColor="@color/colorFontLight"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp">
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:text="MONTH"
+            android:text="This Month"
             android:textAlignment="center"
             android:textColor="@color/colorSecondary"
-            android:textSize="44sp"
+            android:textSize="36sp"
             android:textStyle="bold"
-            tools:text="MONTH" />
+            tools:text="This Month" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/init_db"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/colorFontLight"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="Initialize Database"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondary"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            tools:text="This Month" />
     </android.support.v7.widget.CardView>
 </LinearLayout>

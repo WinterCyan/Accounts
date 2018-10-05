@@ -1,26 +1,27 @@
 package wintercyan.accounts
 
+import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import java.sql.Connection
 import java.sql.Driver
 import java.sql.DriverManager
 import java.sql.SQLException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.logging.SimpleFormatter
 import kotlin.collections.ArrayList
 
-private val CREATE_ITEM = "create table item(" +
+const val CREATE_ITEM = "create table item(" +
         "id integer primary key autoincrement," +
         "name text," +
         "date date," +
         "amount real)"
-private val QUERY_ITEM = "select * from item"
-private val DROP_ITEM = "drop table if exists item"
+const val DROP_ITEM = "drop table if exists item"
+const val ALL: Int = 1
+const val LAST_MONTH: Int = 2
+const val THIS_MONTH: Int = 3
+const val jdbcUrl = "jdbc:sqldroid:/data/data/wintercyan.accounts/databases/accounts.db"
+const val dbName = "accounts.db"
 
 class SQLite(context: Context, database: String, version: Int) : SQLiteOpenHelper(context, database, null, version) {
 
@@ -32,14 +33,13 @@ class SQLite(context: Context, database: String, version: Int) : SQLiteOpenHelpe
         db!!.execSQL(DROP_ITEM)
     }
 
-    fun getDates(): ArrayList<String?> {
+    private fun getDates(): ArrayList<String?> {
         try {
             DriverManager.registerDriver(Class.forName("org.sqldroid.SQLDroidDriver").newInstance() as Driver)
         } catch (e: Exception) {
             throw RuntimeException("Failed to register SQLDroidDriver")
         }
 
-        val jdbcUrl = "jdbc:sqldroid:/data/data/wintercyan.accounts/databases/accounts.db"
         try {
             val conn = DriverManager.getConnection(jdbcUrl)
             val stat = conn.createStatement()
@@ -63,7 +63,7 @@ class SQLite(context: Context, database: String, version: Int) : SQLiteOpenHelpe
         }
     }
 
-    fun query(db: SQLiteDatabase, kind: String): ArrayList<Account>{
+    fun query(db: SQLiteDatabase, kind: Int): ArrayList<Account>{
         val dateList = getDates()
         var today = dateList[0]
         var firstMonthDay = dateList[1]
@@ -71,9 +71,9 @@ class SQLite(context: Context, database: String, version: Int) : SQLiteOpenHelpe
 
         var sql: String? = null
         when (kind){
-            "all" -> sql = "select * from item"
-            "one month" -> sql = "select * from item where date between '$lastMonthToday' and '$today';"
-            "this month" -> sql = "select * from item where date between '$firstMonthDay' and '$today';"
+            ALL -> sql = "select * from item"
+            LAST_MONTH -> sql = "select * from item where date between '$lastMonthToday' and '$today';"
+            THIS_MONTH -> sql = "select * from item where date between '$firstMonthDay' and '$today';"
         }
         var cursor = db.rawQuery(sql!!, null)
         var id: Int
@@ -92,6 +92,23 @@ class SQLite(context: Context, database: String, version: Int) : SQLiteOpenHelpe
         }
         cursor.close()
         return list
+    }
+
+    fun initDatabase(db: SQLiteDatabase?){
+        var day: Date
+        for (i in -70..70) {
+            val c = Calendar.getInstance()
+            c.add(Calendar.DATE, i)
+            day = c.time
+            val date = SimpleDateFormat("yyyy-MM-dd").format(day)
+
+            var values = ContentValues().apply {
+                put("name", "name")
+                put("date", date)
+                put("amount", "1.0")
+            }
+            db!!.insert("item", null, values)
+        }
     }
 }
 
