@@ -1,101 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.SwipeRefreshLayout android:id="@+id/refreshView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="top|center"
-    android:orientation="vertical"
-    android:padding="5dp">
+    tools:context=".MainActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/dayCard"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/colorFontLight"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="All Days"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/colorSecondary"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            tools:text="All Days" />
-    </android.support.v7.widget.CardView>
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/lastMonthCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/colorFontLight"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Today: "
+                android:textAllCaps="false"
+                android:textSize="24sp"
+                android:textStyle="italic" />
 
-        <TextView
+            <TextView
+                android:id="@+id/todayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="24dp"
+                android:fontFamily="cursive"
+                android:text="300.0"
+                android:textColor="@color/colorSecondary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="This Month: "
+                android:textSize="24sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/monthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="cursive"
+                android:text="300.0"
+                android:textColor="@color/colorSecondary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="Last Month"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/colorSecondary"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            tools:text="Last Month" />
-    </android.support.v7.widget.CardView>
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/thisMonthCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:clickable="true"
-        app:cardBackgroundColor="@color/colorFontLight"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="16dp" />
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="This Month"
-            android:textAlignment="center"
-            android:textColor="@color/colorSecondary"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            tools:text="This Month" />
-    </android.support.v7.widget.CardView>
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/init_db"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/colorFontLight"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="Initialize Database"
-            android:textAlignment="center"
-            android:textColor="@color/colorSecondary"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            tools:text="This Month" />
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="top|center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="5dp">-->
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:id="@+id/dayCard"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:cardBackgroundColor="@color/colorFontLight"-->
+                <!--app:cardCornerRadius="5dp"-->
+                <!--app:cardElevation="5dp">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="All Days"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+                    <!--android:textColor="@color/colorSecondary"-->
+                    <!--tools:text="All Days" />-->
+            <!--</android.support.v7.widget.CardView>-->
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:id="@+id/lastMonthCard"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:cardBackgroundColor="@color/colorFontLight"-->
+                <!--app:cardCornerRadius="5dp"-->
+                <!--app:cardElevation="5dp">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Last Month"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+                    <!--android:textColor="@color/colorSecondary"-->
+                    <!--tools:text="Last Month" />-->
+            <!--</android.support.v7.widget.CardView>-->
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:id="@+id/thisMonthCard"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:clickable="true"-->
+                <!--app:cardBackgroundColor="@color/colorFontLight"-->
+                <!--app:cardCornerRadius="5dp"-->
+                <!--app:cardElevation="5dp">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="This Month"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="@color/colorSecondary"-->
+                    <!--tools:text="This Month" />-->
+            <!--</android.support.v7.widget.CardView>-->
+
+            <!--&lt;!&ndash;<android.support.v7.widget.CardView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/init_db"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_margin="5dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:cardBackgroundColor="@color/colorFontLight"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:cardCornerRadius="15dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:cardElevation="5dp">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginTop="24dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginBottom="24dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="Initialize Database"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textAlignment="center"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="@color/colorSecondary"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="36sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+            <!--&lt;!&ndash;tools:text="This Month" />&ndash;&gt;-->
+            <!--&lt;!&ndash;</android.support.v7.widget.CardView>&ndash;&gt;-->
+        <!--</LinearLayout>-->
+    </LinearLayout>
+
+
+</android.support.v4.widget.SwipeRefreshLayout>
+

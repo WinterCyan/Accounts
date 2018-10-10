@@ -10,8 +10,8 @@ class AccountHolder(accountView: View): RecyclerView.ViewHolder(accountView) {
     private val amountText: TextView = accountView.findViewById(R.id.account_amount)
 
     fun updateWithAccount(account: Account) {
-        nameText.text = account.name
-        dateText.text = account.date.toString()
+        nameText.text = account.name+" "    // keep italic character showing completely.
+        dateText.text = account.date
         amountText.text = account.amount.toString()
     }
 }

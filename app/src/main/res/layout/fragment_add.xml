@@ -25,6 +25,8 @@
                 android:id="@+id/nameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/name2"
+                android:drawablePadding="4dp"
                 android:hint="Item name: "
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
@@ -40,6 +42,9 @@
                 android:id="@+id/dateText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/calendar"
+                android:drawableRight="@mipmap/select_date"
+                android:drawablePadding="4dp"
                 android:focusable="false"
                 android:hint="Date: "
                 android:inputType="date" />
@@ -56,6 +61,8 @@
                 android:id="@+id/amountText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/amount"
+                android:drawablePadding="4dp"
                 android:hint="Amount: "
                 android:inputType="numberDecimal" />
         </android.support.design.widget.TextInputLayout>
