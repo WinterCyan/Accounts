@@ -94,21 +94,21 @@ class SQLite(context: Context, database: String, version: Int) : SQLiteOpenHelpe
         return list
     }
 
-    fun initDatabase(db: SQLiteDatabase?){
-        var day: Date
-        for (i in -70..70) {
-            val c = Calendar.getInstance()
-            c.add(Calendar.DATE, i)
-            day = c.time
-            val date = SimpleDateFormat("yyyy-MM-dd").format(day)
-
-            var values = ContentValues().apply {
-                put("name", "name")
-                put("date", date)
-                put("amount", "1.0")
-            }
-            db!!.insert("item", null, values)
-        }
-    }
+//    fun initDatabase(db: SQLiteDatabase?){
+//        var day: Date
+//        for (i in -70..70) {
+//            val c = Calendar.getInstance()
+//            c.add(Calendar.DATE, i)
+//            day = c.time
+//            val date = SimpleDateFormat("yyyy-MM-dd").format(day)
+//
+//            var values = ContentValues().apply {
+//                put("name", "name")
+//                put("date", date)
+//                put("amount", "1.0")
+//            }
+//            db!!.insert("item", null, values)
+//        }
+//    }
 }
 

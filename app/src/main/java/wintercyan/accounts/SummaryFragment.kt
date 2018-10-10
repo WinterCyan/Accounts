@@ -158,10 +158,6 @@ class SummaryFragment: Fragment() {
             }
             cursor.close()
         }
-
-        for (key in dateAmountMap.keys){
-            println("$key, ${dateAmountMap[key]}")
-        }
         return dateAmountMap
     }
 
